@@ -19,7 +19,7 @@ describe("Rover class", function() {
     test("response returned by receiveMessage contains the name of the message", function () {
       let testerMessage = new Message("pineapple");
       let testerRover = new Rover(10);
-      expect(testerRover.receiveMessage(testerMessage)).toBeDefined();
+      expect(testerRover.receiveMessage(testerMessage).message).toBeDefined();
     });
 
     test("response returned by receiveMessage includes two results if two commands are sent in the message", 
@@ -27,7 +27,11 @@ describe("Rover class", function() {
       let commands = [new Command("apples"), new Command("pine")];
       let testerMessage = new Message("pineapple", commands);
       let testerRover = new Rover(10);
-      expect((testerRover.receiveMessage(testerMessage).commands.length)).toEqual(2);
+      expect((testerRover.receiveMessage(testerMessage).results.length)).toEqual(2);
+    });
+
+    test("responds correctly to the status check command", function() {
+
     });
   // 7 tests here!
 
