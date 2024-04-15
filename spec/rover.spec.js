@@ -9,10 +9,18 @@ const Command = require('../command.js');
 describe("Rover class", function() {
 
     test("constructor sets position and default values for mode and generatorWatts", function () {
-      let testerRover = new Rover(position);
+      let testerRover = new Rover(10);
+      console.log(testerRover);
       expect(testerRover.position).toBeDefined();
       expect(testerRover.mode).toBeDefined();
       expect(testerRover.generatorWatts).toBeDefined();
+    });
+
+    test("response returned by receiveMessage contains the name of the message", function () {
+      let testerMessage = new Message("pineapple");
+      let testerRover = new Rover(10);
+      console.log(testerRover.receiveMessage(testerMessage));
+      expect(testerRover.receiveMessage(testerMessage)).toBeDefined();
     });
   // 7 tests here!
 
