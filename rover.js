@@ -18,7 +18,7 @@ class Rover {
          roverStatus: null,
       };
    //Loops through items in message.commands array stored temporarily in tempCommands.
-      for(const item in tempCommands){
+      for(const item in message.commands){
       //Util used to strictly compare object with string value
          if(util.isDeepStrictEqual(tempCommands[item].commandType, "STATUS_CHECK")){
             statusResults.completed = true,
@@ -27,21 +27,21 @@ class Rover {
                generatorWatts: this.generatorWatts,
                position: this.position,
          }
-         arr.push(statusResults);
+         arr.push(Object.assign({}, statusResults));
       //else if statement that sets mode to new value when command is recieved.
        } else if (util.isDeepStrictEqual(tempCommands[item].commandType, "MODE_CHANGE")) {
             this.mode = tempCommands[item].value;
             modeResults.completed = true;
-            arr.push(modeResults);
-         } else if (util.isDeepStrictEqual(tempCommands[item].commandType, "MOVE")){
+            arr.push(Object.assign({}, modeResults));
+         } else if (util.isDeepStrictEqual(tempCommands[item].commandType, 'MOVE')){
          //nested conditional that only allows position to change when in normal mode.
-            if(this.mode === "NORMAL"){
+            if(util.isDeepStrictEqual(this.mode, "NORMAL")){
                this.position = tempCommands[item].value;
                moveResults.completed = true;
-               arr.push(moveResults);
-            } else {
+               arr.push(Object.assign({}, moveResults));
+            } else if (util.isDeepStrictEqual(this.mode, "LOW_POWER")){
                moveResults.completed = false;
-               arr.push(moveResults);
+               arr.push(Object.assign({}, moveResults));
             }
          }
       }  

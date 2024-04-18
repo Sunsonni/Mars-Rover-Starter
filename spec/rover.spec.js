@@ -3,7 +3,7 @@ const Message = require('../message.js');
 const Command = require('../command.js');
 
 describe("Rover class", function() {
-  //Test 7
+//Test 7
     test("constructor sets position and default values for mode and generatorWatts", function () {
       let testerRover = new Rover(10);
       expect(testerRover.position).toBeDefined();
@@ -54,6 +54,7 @@ describe("Rover class", function() {
       expect((response.results[1].completed)).toBeFalsy();
       expect((response.results[2].roverStatus.position)).toEqual(0);
     });
+  //Test 13
     test("responds with the position for the move command", function() {
       let commands = [new Command("MOVE", 1234), new Command("MOVE", 555), new Command("STATUS_CHECK")];
       let testerMessage = new Message("pineapple", commands);
